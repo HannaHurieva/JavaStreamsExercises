@@ -62,11 +62,19 @@ public class Lecture5 {
                 .orElse(0);
 
         System.out.println("Average price of cars: " + averagePrice);
+        assertThat(averagePrice).isEqualTo(52693.19979);
     }
 
     @Test
     public void test() throws Exception {
+        List<Double> prices = MockData.getCars().stream()
+                .map(Car::getPrice)
+                .collect(Collectors.toList());
 
+        double sum = prices.stream().mapToDouble(price -> price).sum();
+        double average = sum / prices.size();
+
+        assertThat(average).isEqualTo(52693.19979);
     }
 }
 
