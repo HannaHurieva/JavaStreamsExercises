@@ -38,6 +38,17 @@ public class Lecture5 {
         // transform from one data type to another
         List<Person> people = MockData.getPeople();
 
+        List<PersonDTO> dtos = people.stream()
+                .map(person -> {
+                    PersonDTO dto = new PersonDTO(person.getId(), person.getFirstName(), person.getAge());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
+        //dtos.forEach(System.out::println);
+        System.out.println(dtos.size());
+
+        assertThat(dtos).hasSize(1000);
     }
 
     @Test
